@@ -1,0 +1,109 @@
+<html>
+  <header>
+    <title>Config Service</title>
+  <meta charset="utf-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css"/>
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+  </header>
+   <body  ng-app="myApp" ng-controller="myCtrl as m" class="container">
+
+<div>
+  <h2>Config Service</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Profile</th>
+        <th>Key</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+	<tbody>
+	<tr ng-repeat="x in m.config">
+      <td>{{x.profile}}</td>
+      <td>{{x.key}}</td>	
+      <td>{{x.value}}</td>       
+	  <td>
+	  <button type="button" ng-click="m.edit(x.profile,x.key)">Edit</button>
+	  <button type="button" ng-click="m.remove(x.profile,x.key)">Remove</button>
+	  </td>
+	</tr>  
+	</tbody>
+	</table>
+	</div>
+	
+	<div>
+    <form>
+		<div class="form-group">
+			<label for="profile">Profile</label>
+			<input type="text" class="form-control" id="profile" ng-model='m.config.profile'/>
+		</div>
+		<div class="form-group">
+			<label for="key">key</label>
+			<input type="text" class="form-control" id="key" ng-model='m.config.key'/>
+		</div>
+		<div class="form-group">
+				<label for="value">value</label>
+				<input type="text" class="form-control" id="value" ng-model='m.config.value'/>
+		</div>
+       <button type="button" ng-click="m.creat()" class="btn btn-default">Save</button>
+	 </form>
+	</div>
+	
+   </body> 
+
+   <script>
+    var app = angular.module('myApp',[]);
+	
+	app.controller("myCtrl", function (){
+	  var m = this ;
+
+	  m.config = [{"profile":"common","key":"name","value":"rhl"},{"profile":"common","key":"region","value":"NY"},
+	  {"profile":"common","key":"lan","value":"EN"}];
+
+      
+	 m.creat = function (){
+     	var newProfile = {'profile':m.config.profile, 'key':m.config.key, 'value':m.config.value};
+     	 var  isNew = true ; 
+     	 for (var i = 0; i < m.config.length ; i++) {
+                 if(m.config[i].profile == newProfile.profile && m.config[i].key == newProfile.key){
+                 	isNew = false ;
+                     m.config[i].value = newProfile.value ;
+                     break ;
+                 }
+     	  	 }	
+     	if(isNew){
+     	 	m.config.push(newProfile);
+     	}
+     	 m.config.profile = ""; 	
+     	 m.config.key = "";
+     	 m.config.value = "";  
+    }
+
+
+    m.edit = function(id,keyid){
+	   for (var i = 0; i < m.config.length; i++) {
+	   	if(m.config[i].profile == id && m.config[i].key == keyid){
+	   		m.config.profile = m.config[i].profile ; 	
+     	    m.config.key = m.config[i].key;
+     	    m.config.value = m.config[i].value; 
+	   	}
+	  } 
+   }
+
+    m.remove = function(id,keyid){
+	   for (var i = 0; i < m.config.length; i++) {
+	   	if(m.config[i].profile==id && m.config[i].key==keyid){
+	   		console.log("IN");
+	   		m.config.splice(i,1);
+	   		console.log(m.config);
+	   	}
+	   }
+	  } 	
+
+  }  
+ );
+
+
+  </script>
+</html>

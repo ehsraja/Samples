@@ -1,4 +1,61 @@
+<html>
+  <header>
+    <title>Config Service</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css">
+   <script src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.4/angular.js"></script>
+  </header>
+   <body  ng-app="myApp" ng-controller="myCtrl as m" class="container">
 
+<div class="col-md-8">
+  <h2>Config Service</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Profile</th>
+        <th>Key</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+	<tbody>
+	<tr ng-repeat="x in m.config">
+      <td>{{x.profile}}</td>
+      <td>{{x.key}}</td>	
+      <td>{{x.value}}</td>       
+	  <td>
+	  <button type="button" ng-click="m.edit(x.profile,x.key)">Edit</button>
+	  <button type="button" ng-click="m.remove(x.profile,x.key)">Remove</button>
+	  </td>
+	</tr>  
+	</tbody>
+	</table>
+	</div>
+	
+	<div class="col-md-4">
+    <form>
+		<div class="form-group">
+			<label for="profile">Profile</label>
+			<input type="text" class="form-control" id="profile" ng-model='m.config.profile'/>
+		</div>
+		<div class="form-group">
+			<label for="key">key</label>
+			<input type="text" class="form-control" id="key" ng-model='m.config.key'/>
+		</div>
+		<div class="form-group">
+				<label for="value">value</label>
+				<input type="text" class="form-control" id="value" ng-model='m.config.value'/>
+		</div>
+       <button type="button" ng-click="m.creat()" class="btn btn-default">Save</button>
+	 </form>
+	</div>
+	<div>
+	   @RahulJain Copyrights 2016
+	</div
+	
+   </body> 
+
+   <script>
     var app = angular.module('myApp',[]);
 
     app.service('NameService',function($http){
@@ -12,32 +69,26 @@
 
 
       this.configList = function (){
-      	return  $http.get('http://localhost:8080/config')
-        .then(function(response) {
+      	  return  $http.get('http://localhost:8080/config').
+        then(function(response) {
             config2 = response.data;
 			console.log("data is " + response.data);
 			return config2 ;
-        }) 
+        })
+	
     }
-      
+
       this.addConfig = function (config) {
     	  return  $http.post('http://localhost:8080/addConfig', config)
-              .then( function (response) {
+              .then(
+              function (response) {
             	  console.log("success");
             	  return response ;
               }
           );
          
-      }
-      
-      
-      this.removeConfig = function (profile, key){
-    	  return $http.delete('http://localhost:8080/deletConfig/'+profile+'/'+key)
-    	  .then( function (response) {
-           console.log("success");
-            return response ;
-      });
-    }
+      }	
+
   }
 );
 	
@@ -51,7 +102,8 @@
       m.list = function(){
       	 NameService.configList()
       	 .then ( function(data) {
-      	 	      m.config = data ;
+      	 	      m.config = data ; 
+				   console.log("data : " + data)
       	 		}, 
       	 		 function (errResponse){
       	 		 	console.error('Error while fetching config');
@@ -63,9 +115,11 @@
 	//  m.config = NameService.configList();
 
      m.list();
-    
+     
+     console.log(m.config);
 
-     m.creat =  function(){
+
+	   m.creat =  function(){
     	 var newProfile = {'profile':m.config.profile, 'key':m.config.key, 'value':m.config.value};
     	 console.log("Adding new Config " + newProfile)
     	 NameService.addConfig(newProfile)
@@ -74,27 +128,6 @@
 	 		 }
  	 	     ); 
      }
-
-	/*  m.creat = function (){
-     	var newProfile = {'profile':m.config.profile, 'key':m.config.key, 'value':m.config.value};
-     	 var  isNew = true ; 
-     	 for (var i = 0; i < m.config.length ; i++) {
-                 if(m.config[i].profile == newProfile.profile && m.config[i].key == newProfile.key){
-                 	isNew = false ;
-                     m.config[i].value = newProfile.value ;
-                     break ;
-                 }
-     	  	 }	
-     	if(isNew){
-     	 	m.config.push(newProfile);
-     	}
-     	 m.config.profile = ""; 	
-     	 m.config.key = "";
-     	 m.config.value = "";  
-    }*/
-     
-     
-     
 
 
     m.edit = function(id,keyid){
@@ -107,7 +140,7 @@
 	  } 
    }
 
-  /*  m.remove = function(id,keyid){
+    m.remove = function(id,keyid){
 	   for (var i = 0; i < m.config.length; i++) {
 	   	if(m.config[i].profile==id && m.config[i].key==keyid){
 	   		console.log("IN");
@@ -115,15 +148,11 @@
 	   		console.log(m.config);
 	   	}
 	   }
-	  } */	
-    
-    m.remove = function (profile,key){
-    	NameService.removeConfig(profile,key)
-    	 .then (m.list(),function (errResponse){
-	 		 	console.error('Error while adding config');
-	 		 }
-	 	     ); 	
-    }
-  }
+	  } 	
 
+  }  
  );
+
+
+  </script>
+</html>

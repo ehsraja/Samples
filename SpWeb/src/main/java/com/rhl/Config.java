@@ -6,6 +6,9 @@ public class Config {
   private String key ;
   private String value ;
   
+  public Config(){
+  }
+  
   
 public Config(String profile, String key, String value) {
 	super();
