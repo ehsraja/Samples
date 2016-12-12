@@ -1,0 +1,44 @@
+
+<div class="col-md-8">
+  <h2>Config List</h2>
+  <table class="table table-striped">
+    <thead>
+      <tr>
+        <th>Profile</th>
+        <th>Key</th>
+        <th>Value</th>
+      </tr>
+    </thead>
+	<tbody>
+	<tr ng-repeat="x in m.config">
+      <td>{{x.profile}}</td>
+      <td>{{x.key}}</td>	
+      <td>{{x.value}}</td>       
+	  <td>
+	  <button type="button" ng-click="m.edit(x.profile,x.key)">Edit</button>
+	  <button type="button" ng-click="m.remove(x.profile,x.key)">Remove</button>
+	  </td>
+	</tr>  
+	</tbody>
+	</table>
+	</div>
+	
+	<div class="col-md-4">
+    <h2>Add\Update</h2>
+	<form>
+		<div class="form-group">
+			<label for="profile">Profile</label>
+			<input type="text" class="form-control" id="profile" ng-model='m.config.profile'/>
+		</div>
+		<div class="form-group">
+			<label for="key">key</label>
+			<input type="text" class="form-control" id="key" ng-model='m.config.key'/>
+		</div>
+		<div class="form-group">
+				<label for="value">value</label>
+				<input type="text" class="form-control" id="value" ng-model='m.config.value'/>
+		</div>
+       <button type="button" ng-click="m.creat()" class="btn btn-default">Save</button>
+	 </form>
+	</div>
+	
