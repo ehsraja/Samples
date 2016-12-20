@@ -1,15 +1,14 @@
 
-myapp.controller("loginCntrl", function ($rootScope,$scope,$location){
+myapp.controller("loginCntrl", function ($rootScope,$scope,$location,AuthSharedService){
 	
-	 $scope.login = function () {
 		 
 		 $scope.login = function (){
-			 if($scope.user == 'test' && $scope.password == 'test'){
-				 $rootScope.authenticated = true;
-				 $location.path('/home');
+			 AuthSharedService.login(
+		                $scope.user,
+		                $scope.password
+		            );
 			 }
-		 }
-	 }       
+	      
 	 
 	 });
    

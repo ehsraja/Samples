@@ -11,11 +11,15 @@
     <script src="js/Controller/loginCntrl.js"></script>
      <script src="js/Controller/myController.js"></script>
     <script src="js/service/nameService.js"></script>
+    <script src="js/service/AuthShareService.js"></script>
+    <script src="bower_components/angular-http-auth/src/http-auth-interceptor.js"></script>
+    <script src="bower_components/angular-resource/angular-resource.js"></script>
+     <script src="https://code.jquery.com/jquery-1.10.2.js"></script>
 </head>
 <body ng-app="myApp" class="container" >
 
 
-<div ng-if="authenticated" ng-include="'view/navbar.html'"></div> 
+ <div ng-if="authenticated" ng-include="'view/navbar.html'"></div>  
 
 
 <!-- <div class="container">
