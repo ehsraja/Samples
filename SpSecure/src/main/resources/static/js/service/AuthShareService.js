@@ -22,7 +22,7 @@ myapp.service('Session', function () {
 
 myapp.service('AuthSharedService', function ($rootScope, $http, authService, Session) {
     return {
-        login: function (username, password) {
+        login: function (username, password, rememberMe) {
             
         	console.log("here in authshared service" + username + password);
         	var config = {
@@ -34,7 +34,8 @@ myapp.service('AuthSharedService', function ($rootScope, $http, authService, Ses
          	console.log("here 2 in authshared service" + details);
             $http.post('authenticate', $.param({
                 username: username,
-                password: password
+                password: password,
+                rememberMe: rememberMe
             })
             		, config)
                 .success(function (data, status, headers, config) {

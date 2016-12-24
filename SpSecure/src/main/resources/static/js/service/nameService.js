@@ -1,4 +1,4 @@
- myapp.service('NameService',function($http){
+ myapp.service('NameService',function($http,$q){
     var config2 = null ;
     
 	  this.list = function (){
@@ -7,22 +7,35 @@
 
 
       this.configList = function (){
-      	return  $http.get('/config')
+    	  var deferred = $q.defer();
+      	  $http.get('/config')
         .then(function(response) {
             config2 = response.data;
 			console.log("data is " + response.data);
-			return config2 ;
-        }) 
+			deferred.resolve(response.data);
+			 config2 ;
+        },
+        function(errResponse){
+            console.error('Error while fetching Users');
+            deferred.reject(errResponse);
+        });
+       return deferred.promise;
     }
       
       this.addConfig = function (config) {
-    	  return  $http.post('/addConfig', config)
+    	  var deferred = $q.defer();
+    	    $http.post('/addConfig', config)
               .then( function (response) {
             	  console.log("success");
-            	  return response ;
-              }
-          );
+            	  deferred.resolve(response);
+            	//  return response ;
+              },
+              function(errResponse){
+                  console.error('Error while fetching Users');
+                  deferred.reject(errResponse);
+              });
          
+    	    return deferred.promise;
       }
       
       

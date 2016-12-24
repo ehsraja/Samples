@@ -5,7 +5,8 @@ myapp.controller("loginCntrl", function ($rootScope,$scope,$location,AuthSharedS
 		 $scope.login = function (){
 			 AuthSharedService.login(
 		                $scope.user,
-		                $scope.password
+		                $scope.password,
+		                $scope.rememberMe
 		            );
 			 }
 	      

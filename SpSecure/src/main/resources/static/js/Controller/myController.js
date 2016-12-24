@@ -3,6 +3,7 @@
 
       
       m.list = function(){
+    	  console.log("listing config")
       	 NameService.configList()
       	 .then ( function(data) {
       	 	      m.config = data ;

@@ -38,10 +38,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
 	    @Autowired
 	    private AccessDeniedHandler restAccessDeniedHandler;
-
-	/*    
+	    
+	/*    @Autowired
+	    private CoustmAuthProvider CoustmAuthProvider ;
+*/
+	    
 	    @Autowired
-	    private UserDetailsService userDetailsService;*/
+	    private UserDetailsService userDetailsService;
 	 
 	 public SecurityConfig() {
 	        super();
@@ -52,6 +55,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 	    public void configureGlobal(AuthenticationManagerBuilder auth) throws Exception {
 	         System.out.println("checking login");
 		     auth.inMemoryAuthentication().withUser("asd").password("123").roles("USER");
+	     //    auth.authenticationProvider(CoustmAuthProvider).userDetailsService(userDetailsService);
 	    }
 	 
 	 @Override
@@ -73,6 +77,7 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
             .passwordParameter("password")
             .permitAll()
             .and()
+            .rememberMe().rememberMeParameter("rememberme").and()
         .logout()
             .logoutUrl("/logout")
             .logoutSuccessHandler(new HttpStatusReturningLogoutSuccessHandler())
