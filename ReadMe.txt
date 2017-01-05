@@ -13,3 +13,9 @@ ex : git add *.java
 
 4) git push --all
 
+
+Branching in git 
+
+Git show all branchs 
+
+git show-branch
