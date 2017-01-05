@@ -16,6 +16,22 @@ ex : git add *.java
 
 Branching in git 
 
-Git show all branchs 
+1) Git show all branchs 
 
-git show-branch
+git show-branche
+
+-a all
+-r remote
+2) git checkout -b SpDB
+
+this will create a branch SpDB
+
+
+3) git checkout master
+go back to master when done 
+
+4) git merge SpDB
+
+
+
+
