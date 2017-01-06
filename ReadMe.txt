@@ -18,7 +18,7 @@ Branching in git
 
 1) Git show all branchs 
 
-git show-branche
+git show-branch
 
 -a all
 -r remote
@@ -31,6 +31,11 @@ this will create a branch SpDB
 go back to master when done 
 
 4) git merge SpDB
+
+5) Pushing brnach to remote
+git push origin SpDB
+
+git push <remote-name> <branch-name>
 
 
 
