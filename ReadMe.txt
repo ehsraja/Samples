@@ -37,6 +37,11 @@ git push origin SpDB
 
 git push <remote-name> <branch-name>
 
+MongoCollection<Document> collection = database.getCollection(colName);
+MongoCursor<Document> cursor = collection.find()
+                                         .sort(new Document("$natural",1)
+                                         .cursorType(CursorType.TailableAwait);
+
 
 
 
