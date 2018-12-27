@@ -21,6 +21,12 @@
         </dependency>
         
         <dependency>
+    <groupId>org.springframework.boot</groupId>
+    <artifactId>spring-boot-starter-websocket</artifactId>
+    <version>2.0.2.RELEASE</version>
+</dependency>
+        
+        <dependency>
     <groupId>org.json</groupId>
     <artifactId>json</artifactId>
     <version>20180130</version>
@@ -47,11 +53,35 @@
     <version>2.9.5</version>
 </dependency>
 
+  <dependency>
+    <groupId>com.fasterxml.jackson.datatype</groupId>
+    <artifactId>jackson-datatype-jsr310</artifactId>
+    <version>2.9.5</version>
+</dependency>
+
  <dependency>
 		<groupId>com.rhl</groupId>
 		<artifactId>pinch-common</artifactId>
 		<version>1.0.0</version>
 	</dependency>
+	
+<dependency>
+    <groupId>javax.websocket</groupId>
+    <artifactId>javax.websocket-api</artifactId>
+    <version>1.1</version>
+</dependency>
+
+<!-- <dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-websocket</artifactId>
+    <version>4.3.0.RELEASE</version>
+</dependency>
+
+<dependency>
+    <groupId>org.springframework</groupId>
+    <artifactId>spring-jms</artifactId>
+    <version>4.3.0.RELEASE</version>
+</dependency> -->
         
       </dependencies>  
   

@@ -1,11 +1,11 @@
-package com.rhl.demo;
+package com.rhl.pinch.demo;
 
 import com.rhl.pinch.client.statsmonitor.StateSchdular;
 
-public class Main {
+public class Sam {
 	
 	
-	public static void main(String k []) throws InterruptedException {
+public static void main(String[] args) throws InterruptedException {
 		
 		StateSchdular stateScheudar = new StateSchdular();
 		stateScheudar.start();
@@ -17,6 +17,7 @@ public class Main {
 		for (int i=0; i< 100; i++) {
 			demo.demoMethod(10);
 		}
+		
 	}
 
 }

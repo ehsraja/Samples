@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.rhl.domain.Report;
+import com.rhl.model.Report;
 import com.rhl.service.ReportService;
 
 @CrossOrigin(origins = "http://localhost:4200")

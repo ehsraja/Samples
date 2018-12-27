@@ -1,6 +1,9 @@
-import { Component, OnInit } from '@angular/core';
+import { Component, OnInit, ViewChild  } from '@angular/core';
 import { HttpClient } from '@angular/common/http';
 import { ActivatedRoute } from '@angular/router';
+import { AgGridNg2 } from 'ag-grid-angular';
+import {ColDef, ColumnApi, GridApi} from 'ag-grid-community';
+
 
 
 @Component({
@@ -9,6 +12,7 @@ import { ActivatedRoute } from '@angular/router';
   styleUrls: ['./reports-view.component.scss']
 })
 export class ReportsViewComponent  implements OnInit {
+	 @ViewChild('agGrid') agGrid: AgGridNg2;
 
  /* columnDefs = [
         {headerName: "ID", "field": "ID" },
@@ -16,7 +20,8 @@ export class ReportsViewComponent  implements OnInit {
         {"headerName": "TimeOut", "field": "TimeOut"}
     ]; */
 	
-	
+	 private api: GridApi;
+    private columnApi: ColumnApi;
      
  constructor(private http: HttpClient, private activeRoute: ActivatedRoute) {
 	 
@@ -27,17 +32,10 @@ export class ReportsViewComponent  implements OnInit {
 
 	
     columnDefs: any; 
-     rowData =  [];
+     rowData: any;
 	  name: ""; 
-	 coldef: any;
-	 row =  {
-        "Num of trades": 10,
-        "TimeIN": "05:45:32",
-        "reportName": "Sample",
-        "timetoCompute": 1000,
-        "Timeout": "05:45:33",
-        "Ticker": "TUUURKEY"
-    };
+	  row =  {"Num of trades":10,"TimeIN":"15:34:11","reportName":"Sample","timetoCompute":1000,"Timeout":"15:34:12","Ticker":"TURKkkEY"};
+	
 
      ngOnInit() {
 		 this.activeRoute.params.subscribe(routeParams => {
@@ -46,18 +44,23 @@ export class ReportsViewComponent  implements OnInit {
 		});
 		//  const name = this.activeRoute.snapshot.paramMap.get('name');
 		 // console.log("param name" + name);
-		 this.coldef = this.http.get('http://localhost:8080/reports/header/Sample').
+		  this.http.get('http://localhost:8080/reports/header/Sample').
 		 subscribe(data => { console.log(data); 
                      		this.columnDefs = data });
-		// console.log("Hi coldef " + this.coldef);
-		// console.log("Hi" + this.coldef[0]);
-       this.http.get('http://localhost:8080/reports/content/Sample').
-	   subscribe(data => this.rowData = data);
-	   this.rowData.push(this.row)
-	 /*  { data.forEach ( row => {console.log(row);
-	                            this.rowData.push(row);  })} 
-	   ); */
+         this.http.get('http://localhost:8080/reports/content/Sample').
+	    subscribe(data =>  {this.rowData = data});
+	    console.log("adding row");
+	
+ 
 		
-    
+	 }
+	 
+	 onGridReady(params): void {
+        this.api = params.api;
+        this.columnApi = params.columnApi;
+        this.api.sizeColumnsToFit();
+		 this.agGrid.api.updateRowData({add: [this.row]});
+	//	 this.api.updateRowData({add: [this.row]] })
+    }
 
 }

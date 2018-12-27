@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RestController;
 
 import com.fasterxml.jackson.core.type.TypeReference;
 import com.fasterxml.jackson.databind.ObjectMapper;
-import com.rhl.domain.Report;
+import com.rhl.model.Report;
 import com.rhl.service.ReportService;
 
 //@CrossOrigin(origins="http://localhost:8080")

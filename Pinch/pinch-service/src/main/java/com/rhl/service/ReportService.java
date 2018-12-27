@@ -8,20 +8,19 @@ import java.util.concurrent.ConcurrentHashMap;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.rhl.domain.Report;
+import com.rhl.model.Report;
 
 @Service("reportService")
 public class ReportService {
 	
 	Map<String,Report> reports = new ConcurrentHashMap<String,Report>();
 	
-	@Autowired
-	private ReportService reportService ; 
+
 	
 	
 	
    public void addReport(String reportName, List<String> header) {
-		Report report = new Report.ReportBuilder("Sample").withHeader(header).build();
+		Report report = new Report.ReportBuilder(reportName).withHeader(header).build();
 		reports.put(reportName, report);
 	}
    

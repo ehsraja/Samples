@@ -7,7 +7,7 @@ import java.util.Map;
 import java.util.Set;
 import org.springframework.stereotype.Service;
 
-import com.rhl.domain.AppService;
+import com.rhl.model.AppService;
 
 
 
